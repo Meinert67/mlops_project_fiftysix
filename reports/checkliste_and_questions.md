@@ -58,13 +58,13 @@ will check the repositories and the code to verify your answers.
 * [x] Make sure that all team members have write access to the GitHub repository (M5)
 * [ ] Create a dedicated environment for you project to keep track of your packages (M2) ! Laves når der er overblik over pakker
 * [x] Create the initial file structure using cookiecutter with an appropriate template (M6)
-* [ ] Fill out the `data.py` file such that it downloads whatever data you need and preprocesses it (if necessary) (M6)
-* [ ] Add a model to `model.py` and a training procedure to `train.py` and get that running (M6)
+* [ ] ! Fill out the `data.py` file such that it downloads whatever data you need and preprocesses it (if necessary) (M6)
+* [ ] ! Add a model to `model.py` and a training procedure to `train.py` and get that running (M6) 
 * [ ] Remember to fill out the `requirements.txt` and `requirements_dev.txt` file with whatever dependencies that you
     are using (M2+M6)
-* [ ] Remember to comply with good coding practices (`pep8`) while doing the project (M7)
+* [ ] Remember to comply with good coding practices (`pep8`) while doing the project (M7) 
 * [ ] Do a bit of code typing and remember to document essential parts of your code (M7)
-* [ ] Setup version control for your data or part of your data (M8)
+* [ ] ! Setup version control for your data or part of your data (M8)
 * [ ] Add command line interfaces and project commands to your code where it makes sense (M9)
 * [ ] Construct one or multiple docker files for your code (M10)
 * [ ] Build the docker files locally and make sure they work as intended (M10)
@@ -122,7 +122,7 @@ will check the repositories and the code to verify your answers.
 ### Question 1
 > **Enter the group number you signed up on <learn.inside.dtu.dk>**
 >
-> Answer:
+> Answer:56
 
 --- question 1 fill here ---
 
@@ -131,7 +131,7 @@ will check the repositories and the code to verify your answers.
 >
 > Example:
 >
-> *sXXXXXX, sXXXXXX, sXXXXXX*
+> *s203729, sXXXXXX, sXXXXXX*
 >
 > Answer:
 
