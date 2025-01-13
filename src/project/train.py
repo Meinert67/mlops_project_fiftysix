@@ -8,7 +8,7 @@ import os
 # Select the device for training
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
-def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 1) -> None:
+def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
     """Train a model on CIFAR-10."""
     print("Training day and night")
     print(f"{lr=}, {batch_size=}, {epochs=}")
@@ -66,6 +66,7 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 1) -> None:
 
     # Save the model
     main_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '../')
+    #main_path = os.path.dirname(os.path.dirname(__file__))
     print(main_path)
     torch.save(model.state_dict(), os.path.join(main_path, "models/model.pth"))
 
