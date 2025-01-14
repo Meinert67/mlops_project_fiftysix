@@ -63,5 +63,5 @@ def preprocess(raw_data_path: Path = os.path.join(os.path.dirname(os.path.dirnam
 
 
 if __name__ == "__main__":
-    # typer.run(preprocess)
-    preprocess()
+    typer.run(preprocess)
+    ##preprocess()

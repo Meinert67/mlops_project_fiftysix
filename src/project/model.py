@@ -1,6 +1,7 @@
 import pytorch_lightning as pl
 import torch
 from torch import nn
+from loguru import logger
 
 
 class MyAwesomeModel(pl.LightningModule):
