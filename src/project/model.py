@@ -55,9 +55,9 @@ class MyAwesomeModel(pl.LightningModule):
 
 if __name__ == "__main__":
     model = MyAwesomeModel()
-    print(f"Model architecture: {model}")
-    print(f"Number of parameters: {sum(p.numel() for p in model.parameters())}")
+    logger.info(f"Model architecture: {model}")
+    logger.info(f"Number of parameters: {sum(p.numel() for p in model.parameters())}")
 
     dummy_input = torch.randn(1, 3, 32, 32)
     output = model(dummy_input)
-    print(f"Output shape: {output.shape}")
+    logger.info(f"Output shape: {output.shape}")

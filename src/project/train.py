@@ -4,14 +4,15 @@ import typer
 from data import preprocess
 from model import MyAwesomeModel
 import os
+from loguru import logger
 
 # Select the device for training
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
 def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
     """Train a model on CIFAR-10."""
-    print("Training day and night")
-    print(f"{lr=}, {batch_size=}, {epochs=}")
+    logger.info("Training day and night")
+    logger.info(f"{lr=}, {batch_size=}, {epochs=}")
 
     # Initialize the model and move it to the selected device
     model = MyAwesomeModel().to(DEVICE)
@@ -52,22 +53,23 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
             epoch_accuracy += accuracy
 
             if i % 100 == 0:
-                print(f"Epoch {epoch+1}, Iter {i}, Loss: {loss.item():.4f}, Accuracy: {accuracy:.4f}")
+                logger.info(f"Epoch {epoch+1}, Iter {i}, Loss: {loss.item():.4f}, Accuracy: {accuracy:.4f}")
 
         # Average loss and accuracy for the epoch
         epoch_loss /= len(train_dataloader)
         epoch_accuracy /= len(train_dataloader)
         statistics["train_loss"].append(epoch_loss)
         statistics["train_accuracy"].append(epoch_accuracy)
+        
 
-        print(f"Epoch {epoch+1}: Average Loss: {epoch_loss:.4f}, Average Accuracy: {epoch_accuracy:.4f}")
+        logger.info(f"Epoch {epoch+1}: Average Loss: {epoch_loss:.4f}, Average Accuracy: {epoch_accuracy:.4f}")
 
-    print("Training complete")
+    logger.info("Training complete")
 
     # Save the model
     main_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '../')
     #main_path = os.path.dirname(os.path.dirname(__file__))
-    print(main_path)
+    logger.info(main_path)
     torch.save(model.state_dict(), os.path.join(main_path, "models/model.pth"))
 
     # Plot and save training statistics
@@ -83,7 +85,7 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
     axs[1].set_ylabel("Accuracy")
 
     fig.savefig(os.path.join(main_path, "reports/figures/training_statistics.png"))
-    print("Training statistics saved as a plot.")
+    logger.info("Training statistics saved as a plot.")
 
 if __name__ == "__main__":
     typer.run(train)

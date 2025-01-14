@@ -7,6 +7,7 @@ import torchvision.datasets as datasets
 from torchvision.transforms import ToTensor
 import torch
 from torch.utils.data import DataLoader
+from loguru import logger
 
 
 class MyDataset(Dataset):
@@ -35,25 +36,25 @@ class MyDataset(Dataset):
         # Load train_set if it exists, else process and save it
         train_set_path = os.path.join(output_folder, 'train_set.pt')
         if os.path.exists(train_set_path):
-            print("train_set.pt exists. Loading data...")
+            logger.info("train_set.pt exists. Loading data...")
             self.train_set = torch.load(train_set_path)
         else:
-            print("Processing raw train data and saving...")
+            logger.info("Processing raw train data and saving...")
             self.train_set = self.raw_train_set
             torch.save(self.raw_train_set, train_set_path)
 
         # Load test_set if it exists, else process and save it
         test_set_path = os.path.join(output_folder, 'test_set.pt')
         if os.path.exists(test_set_path):
-            print("test_set.pt exists. Loading data...")
+            logger.info("test_set.pt exists. Loading data...")
             self.test_set = torch.load(test_set_path)
         else:
-            print("Processing raw test data and saving...")
+            logger.info("Processing raw test data and saving...")
             self.test_set = self.raw_test_set
             torch.save(self.raw_test_set, test_set_path)
 
 def preprocess(raw_data_path: Path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '../data/raw'), output_folder: Path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '../data/processed')) -> None:
-    print("Preprocessing data...")
+    logger.info("Preprocessing data...")
     dataset = MyDataset(raw_data_path)
     
     dataset.preprocess(output_folder)
