@@ -5,6 +5,7 @@ from data import preprocess
 from model import MyAwesomeModel
 import os
 from loguru import logger
+import wandb
 
 # Select the device for training
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
@@ -13,7 +14,16 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
     """Train a model on CIFAR-10."""
     logger.info("Training day and night")
     logger.info(f"{lr=}, {batch_size=}, {epochs=}")
-
+    
+    # defining weight and bias (name for runs can be added)
+    wandb.init(
+        project="cifar-10",
+        config={"lr": lr, 
+                "batch_size": batch_size, 
+                "epochs": epochs, 
+                "optimizer": "adam", 
+                "dropout_rate": 0.5},
+    )
     # Initialize the model and move it to the selected device
     model = MyAwesomeModel().to(DEVICE)
 
@@ -30,7 +40,6 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
 
     # For tracking statistics
     statistics = {"train_loss": [], "train_accuracy": []}
-
     for epoch in range(epochs):
         model.train()
         epoch_loss = 0.0
@@ -51,7 +60,8 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
             epoch_loss += loss.item()
             accuracy = (y_pred.argmax(dim=1) == target).float().mean().item()
             epoch_accuracy += accuracy
-
+            
+            wandb.log({"train_loss": loss.item(), "train_accuracy": accuracy})
             if i % 100 == 0:
                 logger.info(f"Epoch {epoch+1}, Iter {i}, Loss: {loss.item():.4f}, Accuracy: {accuracy:.4f}")
 
@@ -71,6 +81,8 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
     #main_path = os.path.dirname(os.path.dirname(__file__))
     logger.info(main_path)
     torch.save(model.state_dict(), os.path.join(main_path, "models/model.pth"))
+    # uploads model to wandb
+    wandb.save(os.path.join(main_path, "models/model.pth"))
 
     # Plot and save training statistics
     fig, axs = plt.subplots(1, 2, figsize=(15, 5))
