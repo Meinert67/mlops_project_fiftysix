@@ -1,11 +1,10 @@
 import matplotlib.pyplot as plt
 import torch
-import typer
 from data import preprocess
 from model import MyAwesomeModel
 import os
 from loguru import logger
-import wandb
+#import wandb
 import hydra
 from omegaconf import DictConfig
 
@@ -114,5 +113,4 @@ def train(cfg: DictConfig) -> None:
     logger.info("Training statistics saved as a plot.")
 
 if __name__ == "__main__":
-    #typer.run(train)
     train()

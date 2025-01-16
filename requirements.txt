@@ -5,4 +5,3 @@ Markdown==3.7
 omegaconf==2.3.0
 pydantic==2.10.5
 torchvision==0.20.1
-wandb==0.19.3
