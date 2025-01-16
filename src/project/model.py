@@ -7,12 +7,12 @@ from loguru import logger
 class MyAwesomeModel(pl.LightningModule):
     """Model for cifar-10"""
 
-    def __init__(self) -> None:
+    def __init__(self, dropout_rate=0.5) -> None:
         super().__init__()
         self.conv1 = nn.Conv2d(3, 32, 3, 1)  # Input channels updated to 3
         self.conv2 = nn.Conv2d(32, 64, 3, 1)
         self.conv3 = nn.Conv2d(64, 128, 3, 1)
-        self.dropout = nn.Dropout(0.5)
+        self.dropout = nn.Dropout(dropout_rate)
 
         # Compute the flattened dimension dynamically
         self.example_input_array = torch.randn(1, 3, 32, 32)  # Example input
@@ -48,10 +48,6 @@ class MyAwesomeModel(pl.LightningModule):
         img, target = batch
         y_pred = self(img)
         return self.loss_fn(y_pred, target)
-
-    def configure_optimizers(self):
-        """Configure optimizer."""
-        return torch.optim.Adam(self.parameters(), lr=1e-3)
 
 
 if __name__ == "__main__":

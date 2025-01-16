@@ -6,16 +6,29 @@ from model import MyAwesomeModel
 import os
 from loguru import logger
 import wandb
+import hydra
+from omegaconf import DictConfig
+
 
 # Select the device for training
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
-def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
+@hydra.main(version_base="1.1", config_path="../../configs", config_name="config.yaml")
+
+#def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 1) -> None:
+def train(cfg: DictConfig) -> None:
     """Train a model on CIFAR-10."""
+    lr = cfg.hyperparameters.learning_rate
+    batch_size = cfg.hyperparameters.batch_size
+    epochs = cfg.hyperparameters.epochs
+    
     logger.info("Training day and night")
     logger.info(f"{lr=}, {batch_size=}, {epochs=}")
+    input()
     
     # defining weight and bias (name for runs can be added)
+
+    """
     wandb.init(
         project="cifar-10",
         config={"lr": lr, 
@@ -24,12 +37,12 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
                 "optimizer": "adam", 
                 "dropout_rate": 0.5},
     )
+    """
     # Initialize the model and move it to the selected device
     model = MyAwesomeModel().to(DEVICE)
 
     data = preprocess()
     train_set = data.train_set
-    test_set = data.test_set
 
     # Create data loaders for training
     train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, shuffle=True)
@@ -61,7 +74,7 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
             accuracy = (y_pred.argmax(dim=1) == target).float().mean().item()
             epoch_accuracy += accuracy
             
-            wandb.log({"train_loss": loss.item(), "train_accuracy": accuracy})
+            # wandb.log({"train_loss": loss.item(), "train_accuracy": accuracy})
             if i % 100 == 0:
                 logger.info(f"Epoch {epoch+1}, Iter {i}, Loss: {loss.item():.4f}, Accuracy: {accuracy:.4f}")
 
@@ -82,7 +95,8 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
     logger.info(main_path)
     torch.save(model.state_dict(), os.path.join(main_path, "models/model.pth"))
     # uploads model to wandb
-    wandb.save(os.path.join(main_path, "models/model.pth"))
+    
+    # wandb.save(os.path.join(main_path, "models/model.pth"))
 
     # Plot and save training statistics
     fig, axs = plt.subplots(1, 2, figsize=(15, 5))
@@ -100,4 +114,5 @@ def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 5) -> None:
     logger.info("Training statistics saved as a plot.")
 
 if __name__ == "__main__":
-    typer.run(train)
+    #typer.run(train)
+    train()
