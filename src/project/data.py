@@ -6,7 +6,6 @@ import os
 import torchvision.datasets as datasets
 from torchvision.transforms import ToTensor
 import torch
-from torch.utils.data import DataLoader
 from loguru import logger
 
 
@@ -53,7 +52,9 @@ class MyDataset(Dataset):
             self.test_set = self.raw_test_set
             torch.save(self.raw_test_set, test_set_path)
 
-def preprocess(raw_data_path: Path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '../data/raw'), output_folder: Path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '../data/processed')) -> None:
+def preprocess(raw_data_path: Path = os.path.join(os.path.dirname(__file__), '../../data/raw'), output_folder: Path = os.path.join(os.path.dirname(__file__), '../../data/processed')) -> None:
+    print(raw_data_path)
+    print(output_folder)
     logger.info("Preprocessing data...")
     dataset = MyDataset(raw_data_path)
     
@@ -63,5 +64,5 @@ def preprocess(raw_data_path: Path = os.path.join(os.path.dirname(os.path.dirnam
 
 
 if __name__ == "__main__":
-    typer.run(preprocess)
-    ##preprocess()
+    #typer.run(preprocess)
+    preprocess()
