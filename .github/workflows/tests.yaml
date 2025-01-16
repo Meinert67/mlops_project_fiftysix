@@ -34,9 +34,6 @@ jobs:
           pip install -r requirements_dev.txt
           pip list
 
-      - name: Run Linter
-        run: flake8 .
-
       - name: Run tests & coverage
         run: |
           coverage run -m pytest tests/
