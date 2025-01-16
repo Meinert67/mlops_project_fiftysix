@@ -15,17 +15,17 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.ba
 
 @hydra.main(version_base="1.1", config_path="../../configs", config_name="config.yaml")
 
-#def train(lr: float = 1e-3, batch_size: int = 32, epochs: int = 1) -> None:
 def train(cfg: DictConfig) -> None:
     """Train a model on CIFAR-10."""
     lr = cfg.hyperparameters.learning_rate
     batch_size = cfg.hyperparameters.batch_size
     epochs = cfg.hyperparameters.epochs
+
+    dropout_rate = cfg.hyperparamters.dropout_rate
     
     logger.info("Training day and night")
     logger.info(f"{lr=}, {batch_size=}, {epochs=}")
-    input()
-    
+
     # defining weight and bias (name for runs can be added)
 
     """
@@ -39,7 +39,7 @@ def train(cfg: DictConfig) -> None:
     )
     """
     # Initialize the model and move it to the selected device
-    model = MyAwesomeModel().to(DEVICE)
+    model = MyAwesomeModel(dropout_rate=dropout_rate).to(DEVICE)
 
     data = preprocess()
     train_set = data.train_set
