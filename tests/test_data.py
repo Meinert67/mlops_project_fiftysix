@@ -1,12 +1,7 @@
 import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-import torch
 from torch.utils.data import Dataset
 from src.project.data import preprocess
-
-
-
-
 
 def test_my_dataset():
     """Test the MyDataset class."""
@@ -27,8 +22,6 @@ def test_my_dataset():
     
     test_targets = set([y for _, y in test])
     assert test_targets == set(range(10))
-
-
 
 if __name__ == "__main__":
     test_my_dataset()

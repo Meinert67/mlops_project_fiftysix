@@ -10,6 +10,5 @@ def test_model():
     y = model(x)
     assert y.shape == (1, 10), "Wrong output shape, should be (1, 10)"
 
-
 if __name__ == "__main__":
     test_model()
