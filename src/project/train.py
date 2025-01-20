@@ -13,6 +13,24 @@ from omegaconf import DictConfig
 DEVICE = torch.device("cuda" if torch.cuda.is_available(
 ) else "mps" if torch.backends.mps.is_available() else "cpu")
 
+# setting a seed
+def seed_everything(seed: int):
+    """Provides a seed for everything that needs it"""
+    import random
+    import numpy as np
+    
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.backends.cudnn.deterministic = False
+    torch.backends.cudnn.benchmark = False
+
+# Set a seed with a random integer, in this case, I choose my verymost favourite sequence of numbers
+seed_everything(sum([482, 729, 315, 604, 867, 193, 528, 941, 376, 852]))
+
+
 
 @hydra.main(version_base="1.1", config_path="../../configs", config_name="config.yaml")
 def train(cfg: DictConfig) -> None:
@@ -21,7 +39,7 @@ def train(cfg: DictConfig) -> None:
     batch_size = cfg.hyperparameters.batch_size
     epochs = cfg.hyperparameters.epochs
 
-    dropout_rate = cfg.hyperparamters.dropout_rate
+    dropout_rate = cfg.hyperparameters.dropout_rate
 
     logger.info("Training day and night")
     logger.info(f"{lr=}, {batch_size=}, {epochs=}")
@@ -46,7 +64,7 @@ def train(cfg: DictConfig) -> None:
 
     # Create data loaders for training
     train_dataloader = torch.utils.data.DataLoader(
-        train_set, batch_size=batch_size, shuffle=True)
+        train_set, batch_size=batch_size, shuffle=True,)
 
     # Loss function and optimizer
     loss_fn = torch.nn.CrossEntropyLoss()

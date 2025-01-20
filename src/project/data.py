@@ -1,5 +1,4 @@
 from pathlib import Path
-
 import typer
 from torch.utils.data import Dataset
 import os
@@ -7,7 +6,10 @@ import torchvision.datasets as datasets
 from torchvision.transforms import ToTensor
 import torch
 from loguru import logger
+import warnings
 
+# Suppress warnings (torch load disable Weights_only=True warning)
+warnings.filterwarnings("ignore")
 
 class MyDataset(Dataset):
     """My custom dataset."""
@@ -52,12 +54,20 @@ class MyDataset(Dataset):
             self.test_set = self.raw_test_set
             torch.save(self.raw_test_set, test_set_path)
 
-def preprocess(raw_data_path: Path = os.path.join(os.path.dirname(__file__), '../../data/raw'), output_folder: Path = os.path.join(os.path.dirname(__file__), '../../data/processed')) -> None:
-    print(raw_data_path)
-    print(output_folder)
-    logger.info("Preprocessing data...")
+default_raw_path = Path(__file__).parent.parent.parent / 'data/raw'
+default_pro_path = Path(__file__).parent.parent.parent / 'data/processed'
+
+def preprocess(raw_data_path: Path = default_raw_path, output_folder: Path = default_pro_path) -> None:
+    """
+    Starts the processes of the dataset
+    Args:
+    raw_data_path (Path): Where the raw data should be saved
+    output_folder (Path): Where the processed data should be saved
+    Returns:
+        Class: MyDataset  
+    """
+    logger.info(f"Preparing data processing \n from: {raw_data_path} \n to: {output_folder}")
     dataset = MyDataset(raw_data_path)
-    
     dataset.preprocess(output_folder)
     
     return dataset
