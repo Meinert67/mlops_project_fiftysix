@@ -1,0 +1,19 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Build container image'
+  args: [
+    'build',
+    '.',
+    '-t',
+    'europe-north1-docker.pkg.dev/fast-asset-447810-r9/repdocker/myimage',
+    '-f',
+    'dockerfiles/train.dockerfile'
+  ]
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Push container image'
+  args: [
+    'push',
+    'europe-north1-docker.pkg.dev/fast-asset-447810-r9/repdocker/myimage'
+  ]
+options:
+  logging: CLOUD_LOGGING_ONLY
