@@ -10,6 +10,7 @@ import numpy as np
 # Select the device for evaluation
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
+
 # Define the evaluation function
 def evaluate(model_path: str, batch_size: int):
     """Evaluate the trained model on the test dataset."""
@@ -24,10 +25,8 @@ def evaluate(model_path: str, batch_size: int):
     # Load the test dataset
     data = preprocess()
     test_set = data.test_set
-    
-    test_dataloader = torch.utils.data.DataLoader(
-        test_set, batch_size=batch_size, shuffle=False
-    )
+
+    test_dataloader = torch.utils.data.DataLoader(test_set, batch_size=batch_size, shuffle=False)
 
     # Loss function
     loss_fn = torch.nn.CrossEntropyLoss()
@@ -71,13 +70,14 @@ def evaluate(model_path: str, batch_size: int):
     plt.ylabel("True Labels")
     plt.title("Confusion Matrix Heatmap")
 
-    main_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '../')
+    main_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "../")
     plt.savefig(os.path.join(main_path, "reports/figures/evaluation_heatmap.png"))
     logger.info("Confusion matrix heatmap saved as a plot.")
 
+
 if __name__ == "__main__":
     # Define the path to the saved model and evaluation parameters
-    main_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '../')
+    main_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "../")
     model_path = os.path.join(main_path, "models/model.pth")
 
     batch_size = 64  # Batch size for evaluation

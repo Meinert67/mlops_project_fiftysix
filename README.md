@@ -9,18 +9,18 @@ Group 56 project in 02476 Machine Learning Operations repository.
 
 ##  Project description
 ### Goal
-The goal of this project is to develop an MLOps pipline. 
-We have selected the task of classifying images. The main goal is not to create a perfect classifier, but to create a good and solid way of working with machine learning. 
+The goal of this project is to develop an MLOps pipline.
+We have selected the task of classifying images. The main goal is not to create a perfect classifier, but to create a good and solid way of working with machine learning.
 
 ### Framework
-The base framework is Pytorch. 
+The base framework is Pytorch.
 We have selected to use Pytorch lightning to simplify training and debuging.
-We are considering which other opensource frameworks, that could help. 
+We are considering which other opensource frameworks, that could help.
 
 
 ### Data
 We are going to use the dataset CIFAR-10. There are 10 mutually exclusive classes.
-The dataset consistes of 50.000 train and 10.000 test images.  
+The dataset consistes of 50.000 train and 10.000 test images.
 
 ## Project structure
 

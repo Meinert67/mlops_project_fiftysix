@@ -1,5 +1,4 @@
 from pathlib import Path
-import typer
 from torch.utils.data import Dataset
 import os
 import torchvision.datasets as datasets
@@ -10,6 +9,7 @@ import warnings
 
 # Suppress warnings (torch load disable Weights_only=True warning)
 warnings.filterwarnings("ignore")
+
 
 class MyDataset(Dataset):
     """My custom dataset."""
@@ -35,7 +35,7 @@ class MyDataset(Dataset):
         """Preprocess the raw data and save it to the output folder."""
 
         # Load train_set if it exists, else process and save it
-        train_set_path = os.path.join(output_folder, 'train_set.pt')
+        train_set_path = os.path.join(output_folder, "train_set.pt")
         if os.path.exists(train_set_path):
             logger.info("train_set.pt exists. Loading data...")
             self.train_set = torch.load(train_set_path)
@@ -45,7 +45,7 @@ class MyDataset(Dataset):
             torch.save(self.raw_train_set, train_set_path)
 
         # Load test_set if it exists, else process and save it
-        test_set_path = os.path.join(output_folder, 'test_set.pt')
+        test_set_path = os.path.join(output_folder, "test_set.pt")
         if os.path.exists(test_set_path):
             logger.info("test_set.pt exists. Loading data...")
             self.test_set = torch.load(test_set_path)
@@ -54,8 +54,10 @@ class MyDataset(Dataset):
             self.test_set = self.raw_test_set
             torch.save(self.raw_test_set, test_set_path)
 
-default_raw_path = Path(__file__).parent.parent.parent / 'data/raw'
-default_pro_path = Path(__file__).parent.parent.parent / 'data/processed'
+
+default_raw_path = Path(__file__).parent.parent.parent / "data/raw"
+default_pro_path = Path(__file__).parent.parent.parent / "data/processed"
+
 
 def preprocess(raw_data_path: Path = default_raw_path, output_folder: Path = default_pro_path) -> None:
     """
@@ -64,15 +66,15 @@ def preprocess(raw_data_path: Path = default_raw_path, output_folder: Path = def
     raw_data_path (Path): Where the raw data should be saved
     output_folder (Path): Where the processed data should be saved
     Returns:
-        Class: MyDataset  
+        Class: MyDataset
     """
     logger.info(f"Preparing data processing \n from: {raw_data_path} \n to: {output_folder}")
     dataset = MyDataset(raw_data_path)
     dataset.preprocess(output_folder)
-    
+
     return dataset
 
 
 if __name__ == "__main__":
-    #typer.run(preprocess)
+    # typer.run(preprocess)
     preprocess()
