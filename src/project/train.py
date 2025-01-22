@@ -5,10 +5,16 @@ from model import MyAwesomeModel
 import os
 from loguru import logger
 
-# import wandb
+import wandb
 import hydra
 from omegaconf import DictConfig
 
+api_key = os.getenv("WANDB_API_KEY")
+
+if api_key:
+    print(f"Successfully retrieved API key: {api_key[:4]}****")
+else:
+    print("Error: WANDB_API_KEY is not set!")
 
 # Select the device for training
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
@@ -28,10 +34,7 @@ def seed_everything(seed: int):
     torch.backends.cudnn.deterministic = False
     torch.backends.cudnn.benchmark = False
 
-
-# Set a seed with a random integer, in this case, I choose my verymost favourite sequence of numbers
 seed_everything(sum([482, 729, 315, 604, 867, 193, 528, 941, 376, 852]))
-
 
 @hydra.main(version_base="1.1", config_path="../../configs", config_name="config.yaml")
 def train(cfg: DictConfig) -> None:
@@ -47,16 +50,16 @@ def train(cfg: DictConfig) -> None:
 
     # defining weight and bias (name for runs can be added)
 
-    """
-    wandb.init(
-        project="cifar-10",
-        config={"lr": lr,
-                "batch_size": batch_size,
-                "epochs": epochs,
-                "optimizer": "adam",
-                "dropout_rate": 0.5},
-    )
-    """
+    if api_key:
+        wandb.init(
+            project="cifar-10",
+            config={"lr": lr,
+                    "batch_size": batch_size,
+                    "epochs": epochs,
+                    "optimizer": "adam",
+                    "dropout_rate": dropout_rate},
+        )
+
     # Initialize the model and move it to the selected device
     model = MyAwesomeModel(dropout_rate=dropout_rate).to(DEVICE)
 
@@ -97,7 +100,9 @@ def train(cfg: DictConfig) -> None:
             accuracy = (y_pred.argmax(dim=1) == target).float().mean().item()
             epoch_accuracy += accuracy
 
-            # wandb.log({"train_loss": loss.item(), "train_accuracy": accuracy})
+            if api_key:
+                wandb.log({"train_loss": loss.item(), "train_accuracy": accuracy})
+                
             if i % 100 == 0:
                 logger.info(f"Epoch {epoch+1}, Iter {i}, Loss: {loss.item():.4f}, Accuracy: {accuracy:.4f}")
 
@@ -113,12 +118,12 @@ def train(cfg: DictConfig) -> None:
 
     # Save the model
     main_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "../")
-    # main_path = os.path.dirname(os.path.dirname(__file__))
     logger.info(main_path)
     torch.save(model.state_dict(), os.path.join(main_path, "models/model.pth"))
+    
     # uploads model to wandb
-
-    # wandb.save(os.path.join(main_path, "models/model.pth"))
+    if api_key:
+        wandb.save(os.path.join(main_path, "models/model.pth"))
 
     # Plot and save training statistics
     fig, axs = plt.subplots(1, 2, figsize=(15, 5))
