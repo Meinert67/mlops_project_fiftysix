@@ -34,7 +34,9 @@ def seed_everything(seed: int):
     torch.backends.cudnn.deterministic = False
     torch.backends.cudnn.benchmark = False
 
+
 seed_everything(sum([482, 729, 315, 604, 867, 193, 528, 941, 376, 852]))
+
 
 @hydra.main(version_base="1.1", config_path="../../configs", config_name="config.yaml")
 def train(cfg: DictConfig) -> None:
@@ -53,11 +55,13 @@ def train(cfg: DictConfig) -> None:
     if api_key:
         wandb.init(
             project="cifar-10",
-            config={"lr": lr,
-                    "batch_size": batch_size,
-                    "epochs": epochs,
-                    "optimizer": "adam",
-                    "dropout_rate": dropout_rate},
+            config={
+                "lr": lr,
+                "batch_size": batch_size,
+                "epochs": epochs,
+                "optimizer": "adam",
+                "dropout_rate": dropout_rate,
+            },
         )
 
     # Initialize the model and move it to the selected device
@@ -102,7 +106,7 @@ def train(cfg: DictConfig) -> None:
 
             if api_key:
                 wandb.log({"train_loss": loss.item(), "train_accuracy": accuracy})
-                
+
             if i % 100 == 0:
                 logger.info(f"Epoch {epoch+1}, Iter {i}, Loss: {loss.item():.4f}, Accuracy: {accuracy:.4f}")
 
@@ -120,7 +124,7 @@ def train(cfg: DictConfig) -> None:
     main_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "../")
     logger.info(main_path)
     torch.save(model.state_dict(), os.path.join(main_path, "models/model.pth"))
-    
+
     # uploads model to wandb
     if api_key:
         wandb.save(os.path.join(main_path, "models/model.pth"))
