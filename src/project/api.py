@@ -60,3 +60,7 @@ async def caption(data: UploadFile = File(...)):
 @app.get("/index/")
 async def hello_world():
     return "Hello API"
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the model inference API!"}
