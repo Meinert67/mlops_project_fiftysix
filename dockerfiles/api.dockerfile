@@ -16,6 +16,7 @@ RUN pip install -r requirements.txt --no-cache-dir --verbose
 RUN pip install . --no-deps --no-cache-dir --verbose
 
 ENV PYTHONPATH="/src/project"
+EXPOSE $PORT
 
-CMD ["uvicorn", "src.project.api:app", "--host", "127.0.0.1", "--port", "80"]
+CMD exec uvicorn src.project.api:app --host 0.0.0.0 --port $PORT
 # ENTRYPOINT ["uvicorn", "src/project/api:app", "--host", "0.0.0.0", "--port", "8000"]
