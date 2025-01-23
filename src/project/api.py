@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 import sys
 import os
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import torch
 from fastapi import FastAPI, File, UploadFile
@@ -36,21 +37,23 @@ app = FastAPI(lifespan=lifespan)
 @app.post("/caption/")
 async def caption(data: UploadFile = File(...)):
     """Generate a caption for an image."""
-    
-    transform = transforms.Compose([
-        transforms.Resize((32, 32)),  # Resize to match model input size
-        transforms.ToTensor(),          # Convert PIL Image to Tensor
-    ])
+
+    transform = transforms.Compose(
+        [
+            transforms.Resize((32, 32)),  # Resize to match model input size
+            transforms.ToTensor(),  # Convert PIL Image to Tensor
+        ]
+    )
 
     # Evaluate the model
     with torch.no_grad():
         # TODO Test image parameters (size, color)
-        img = Image.open(data.file).convert('RGB')
+        img = Image.open(data.file).convert("RGB")
         img_tensor = transform(img).unsqueeze(0).to(device)  # Add batch dimension and move to DEVICE
 
         y_pred = model(img_tensor)
         # y_pred.argmax(dim=1)
-    
+
     return y_pred.argmax(dim=1)
 
 
