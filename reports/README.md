@@ -56,7 +56,7 @@ will check the repositories and the code to verify your answers.
 
 * [x] Create a git repository (M5)
 * [x] Make sure that all team members have write access to the GitHub repository (M5)
-* [ ] Create a dedicated environment for you project to keep track of your packages (M2) ! Laves når der er overblik over pakker
+* [x] Create a dedicated environment for you project to keep track of your packages (M2)
 * [x] Create the initial file structure using cookiecutter with an appropriate template (M6)
 * [x] Fill out the `data.py` file such that it downloads whatever data you need and preprocesses it (if necessary) (M6)
 * [x] Add a model to `model.py` and a training procedure to `train.py` and get that running (M6)
@@ -121,12 +121,14 @@ will check the repositories and the code to verify your answers.
 ### Question 1
 **Enter the group number you signed up on <learn.inside.dtu.dk>**
 
-Answer: 56
+Answer:
+56
 
 ### Question 2
  **Enter the study number for each member in the group**
 
- Answer: s203729, s236120, s234867 and s234829.
+ Answer: 
+ s203729, s236120, s234867 and s234829.
 
 ### Question 3
  **A requirement to the project is that you include a third-party package not covered in the course. What framework did you choose to work with and did it help you complete the project?**
@@ -156,7 +158,6 @@ Through the project we’ve used the file requirements.txt, from the cookiecutte
 Recommended answer length: 100-200 words.
 
 Answer:
-
 We started the project by using the cookiecutter template from the course. We have followed the structure without any major deviation. The main part of our code is placed in src/project. Our data is in the data folder. Our dockerfiles and cloudbuild are in dockerfiles. The configs folder is for the hydra config and a vertex ai cpu config. Our trained model is in models. And so on. We have not used the folder notebooks. We added a .gcloudignore which is the same as the .gitignore except that the data was not ignored, when pushing to the cloud. This was so we could add the data to our cloud bucket. Some of our packages add folders, like hydra, which adds the output folder and wandb adds its own folder to keep track of the runs and configurations.
 
 
@@ -166,8 +167,6 @@ We started the project by using the cookiecutter template from the course. We ha
 Recommended answer length: 100-200 words.
 
 Answer:
-
-
 In our project, we used ruff version 0.1.3 for linting and formatting. Ruff is run in the pre-commit-config.yaml, and streamlines the code for the entire project. Furthermore, we made sure to follow the styleguide pep8 for our Python code in order to make our code better and more readable. Readable code is essential in larger multi-developer projects. This is because creating code in a predefined readable way ensures that the developers can read each other's code with little effort. In addition to this, it’s important to document functions and important parts of your code with comments. This is crucial for explaining complex functions and solutions in your code.
 
 
@@ -179,8 +178,6 @@ In our project, we used ruff version 0.1.3 for linting and formatting. Ruff is r
 Recommended answer length: 50-100 words.
 
 Answer:
-
-
 It was important for us to implement tests that made sure our data and model worked as intended. To begin we created test_data.py which tests for the correct amount of image in the train and test dataset. Furthermore, it also checks for the correct amount of training targets in the dataset. The file test_model.py creates and runs the model with a random input, and checks for the correct size of the model output.
 
 
@@ -190,7 +187,6 @@ It was important for us to implement tests that made sure our data and model wor
 Recommended answer length: 100-200 words.
 
 Answer:
-
 The total code coverage of our code is 80%, which includes tests for our data.py and model.py. While 80% is not a total coverage of our source code, it is a reasonably high code coverage, which is a good indicator that we have tested our code. Even with a hundred percent code coverage there is no guarantee that the code would be bug free and therefore there is no guarantee that there are no errors or bugs. However, hopefully the high code coverage has helped us with limiting these slightly. The total code coverage was obtained through running coverage run -m pytest tests/ which runs our tests in the tests folder, and gives a percentage of how much of the source code files is run through in our tests.
 
 
@@ -199,8 +195,6 @@ The total code coverage of our code is 80%, which includes tests for our data.py
 Recommended answer length: 100-200 words.
 
 Answer:
-
-
 To simplify our workflow we chose not to use other branches than the main branch. This worked due to our group's minimal size, however in larger teams, there is a lot to benefit from using personal branches or feature branches for a larger assignment. When in larger groups using branches works as an extra layer of protection that protects our code by preventing the different members from overwriting each other's code. We would therefore have chosen personal branches if not for our minimal group size. Furthermore we could by using pull requests add a layer of safety since the changes are only applied after review and testing. Being completely honest this way of working led to more need of communication and one or two slight mix-ups in git pull/pushes, which have taught us the values of branches the hard way.
 
 
@@ -210,7 +204,6 @@ To simplify our workflow we chose not to use other branches than the main branch
 Recommended answer length: 100-200 words.
 
 Answer:
-
 Data version control in this course was a bit of a bumpy road. Since the part with google drive had been removed from the curriculum in the start of the course, we’ve only started using dvc when working with google cloud. We ended up making use of gsutil instead through the Google storage extension (gs) adding files to our repository/bucket. If we have had more changing data or had it originally stored in google drive dvc could have helped us tracking and versioning and could have had an even bigger role if we had worked with larger datasets (and models). For controlling the data and model reproducibility part of our pipeline it can be a nice extension to git, where github takes care of the code part, google cloud takes care of the data and models.
 
 
@@ -220,8 +213,6 @@ Data version control in this course was a bit of a bumpy road. Since the part wi
 Recommended answer length: 200-300 words.
 
 Answer:
-
-
 We implemented continuous integration into our project. Specifically we created unittesting in test_data.py and test_model.py. Furthermore we implemented a linting step using ruff --fix in the pre-commit-config.yaml file, to improve our source code readability. We created a workflow that automatically runs the pre-commit upon pushing to git.
 
 Lastly our workflow file, tests.yaml, is responsible for installing the necessary Python packages using pip. The necessary packages would be read from the requirements.txt and requirements_dev.txt and then installed in the virtual environment. We use pip caching. Once the necessary modules are installed, the unit testing begins using pytest, and a check for code coverage would be run. It was important for us that these tests work on the stable version of Python version 3.12. In addition, tests would be run on these separate operating systems: ubuntu-latest, windows-latest and macos-latest. This ensures that the project works on all three of the popular operating systems.
@@ -242,8 +233,6 @@ Recommended answer length: 50-100 words.
 Example: We used a simple argparser, that worked in the following way: Python my_script.py --lr 1e-3 --batch_size 25
 
 Answer:
-
-
 In our project, we made use of config files. Specifically we have config.yaml and config_cpu.yaml. The former is used for configuring the hyperparameters for training our model. This includes bath_size, epochs, learning_rate, dropout_rate and HYDRA_FULL_ERROR.
 The latter is used for setting up vertex AI in google cloud. Vertex can be used to train the model.
 
@@ -256,8 +245,6 @@ We did not implement an argparser, since config files were sufficient.
 Recommended answer length: 100-200 words.
 
 Answer:
-
-
 To ensure our experiments are reproducible, we made use of config files to ensure that the parameters were the same. When train.py is run to train the model, a shuffling of our train dataset is done. Here we use seeding to make sure that the shuffle is the same each time, thus ensuring reproducibility.
 
 We have also used docker and created an image that can run independently. A docker image provides a kind of system-level reproducibility by creating isolated program dependencies. So a new team member or a team member on different systems are all able to run the same code.
@@ -268,8 +255,6 @@ To reproduce an experiment, one would have to make sure not to change the seed o
 **Upload 1 to 3 screenshots that show the experiments that you have done in W&B (or another experiment tracking service of your choice). This may include loss graphs, logged images, hyperparameter sweeps etc. You can take inspiration from this figure. Explain what metrics you are tracking and why they are important.**
 
 Recommended answer length: 200-300 words + 1 to 3 screenshots.
-
-Example: As seen in the first image we have tracked ... and ... which both inform us about ... in our experiments. As seen in the second image we are also tracking ... and ...
 
 Answer:
 In Weights and Bias we have 4 graphs, that track the training loss, training accuracy, test loss and test accuracy. We track the parameters batch size, learning rate, amount of epochs and dropout rate.
@@ -296,7 +281,8 @@ Link to api docker file: dockerfiles/api.dockerfile
 ### Question 16
 **When running into bugs while trying to run your experiments, how did you perform debugging? Additionally, did you try to profile your code or do you think it is already perfect?**
 
-Answer: It is safe to say that there definitely was a need for debugging in this course. Debugging method was dependent on the independent group members and the specific bug. Some stuck with their usual practices and others tried the built-in version in VS-code. It was nice to be inspired and try out some new things, but it’ll probably take longer to get into the good habits of using them. In regards to Google Cloud we also got acquainted with using the log as a part of the debugging.
+Answer:
+It is safe to say that there definitely was a need for debugging in this course. Debugging method was dependent on the independent group members and the specific bug. Some stuck with their usual practices and others tried the built-in version in VS-code. It was nice to be inspired and try out some new things, but it’ll probably take longer to get into the good habits of using them. In regards to Google Cloud we also got acquainted with using the log as a part of the debugging.
 
 We did a single profiling run of our main code at some point, but didn’t try to use it to improve our model in this project. However, it’s a very nice tool to know that it exists for the future.
 
@@ -367,7 +353,7 @@ We used our previously created virtual machine only with CPU, where Python was i
 **Did you manage to write an API for your model? If yes, explain how you did it and if you did anything special. If not, explain how you would do it.**
 
 Answer:
-We did manage to write an API for our model. We used FastAPI to do this. We did this by creating `api.py`, which has a lifespan, where it imports our trained model and waits. We have a post, where it should be possible to upload a file. The model will then try to predict which class the image belongs to. We have also created some get functions so that it can be tested. This includes a get “/”, which has a function that returns `{"message": "Welcome to the model inference API!"}`. After the requests have ended, the lifespan deletes the model and terminates.
+We did manage to write an API for our model. We used FastAPI to do this. We did this by creating `api.py`, which has a lifespan, where it imports our trained model and waits. We have a post, where it should be possible to upload a file. The model will then try to predict which class the image belongs to. We have also created some get functions so that it can be tested. This includes a get "/" which has a function that returns `{"message": "Welcome to the model inference API!"}`. After the requests have ended, the lifespan deletes the model and terminates.
 
 
 ### Question 24
