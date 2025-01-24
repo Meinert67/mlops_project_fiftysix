@@ -111,10 +111,10 @@ will check the repositories and the code to verify your answers.
 
 * [ ] Write some documentation for your application (M32)
 * [ ] Publish the documentation to GitHub Pages (M32)
-* [ ] Revisit your initial project description. Did the project turn out as you wanted?
-* [ ] Create an architectural diagram over your MLOps pipeline
-* [ ] Make sure all group members have an understanding about all parts of the project
-* [ ] Uploaded all your code to GitHub
+* [x] Revisit your initial project description. Did the project turn out as you wanted?
+* [x] Create an architectural diagram over your MLOps pipeline
+* [x] Make sure all group members have an understanding about all parts of the project
+* [x] Uploaded all your code to GitHub
 
 ## Group information
 
@@ -428,13 +428,22 @@ Answer:
 
 Answer:
 ![mlops_system_diagram](figures/mlops_pipeline_pic.png)
+The starting point of the diagram is 'Dev', where we developed the project and the code. From here we will commit and push it to git. In GitHub several tests are done in Actions, this includes a pre-commit and test file. When a branch is pushed to main, then Cloud Build builds a Docker Image that is saved to Artifact Registry. From 'Dev' we can get Vertex AI on Google Cloud to collect and run the latest Docker Image from the Artifact Registry, where it will train the model.
+Furthermore, from 'Dev' we can train the model locally and push it to Google Cloud, where a user can access its input and output via an API. The User has many paths they can take to use the model. They can clone the Source code directly from GitHub, or pull the newest Docker Image from Artifact Registry. The user can also choose to just query and download the trained model, from Vertex AI, to their computer. Finally the user can upload a picture to the API, where the model will run and try to predict which of the 10 classes best fits the image. A prediction will then be sent back to the user.
+
+
 
 
 ### Question 30
 **Discuss the overall struggles of the project. Where did you spend most time and what did you do to overcome these challenges?**
 
 Answer:
-One of the biggest challenges in the project was getting Git to work on everyone’s computer. Another big challenge was getting GitHub actions and testing to work across all three Operating Systems. The reason for this was `pipreqs` didn’t always get a complete requirements list, thus the testing would fail. The biggest challenges in this project were using and implementing GCP. There were some fundamental packages of PyTorch which hadn’t been installed as it was supposed to and which ended up consuming a lot of our and the TA’s time and energy.
+One of the biggest challenges in the project was getting Git to work on everyone’s computer. Another big challenge was getting GitHub actions and testing to work across all three Operating Systems. The reason for this was `pipreqs` didn’t always get a complete requirements list, thus the testing would fail. The biggest challenges in this project were using and implementing GCP. There were some fundamental packages of PyTorch which hadn’t been installed as it was supposed to and which ended up consuming a lot of our and the TA’s time and energy. 
+For linting we wanted to introduce the Python module flake8 to our project. This proved to be a big headache, as the GitHub Actions would fail at the slightest error with flake8. Flake8 proved to be a struggle and took much time, but in the end we scraped it.
+Wandb was a time consuming struggle - it gave us a lot of difficulties, because of the api key. Which should be kept secret, but still work locally, in docker, in GitHub and in google cloud. We had to find workarounds and secret managers, but without changing the scripts too much.
+
+In the end, even though we had many struggles, we very much enjoyed the process of learning through creating a project, and getting hands-on experience.
+
 
 
 
