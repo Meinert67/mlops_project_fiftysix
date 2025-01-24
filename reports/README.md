@@ -127,7 +127,7 @@ Answer:
 ### Question 2
  **Enter the study number for each member in the group**
 
- Answer: 
+ Answer:
  s203729, s236120, s234867 and s234829.
 
 ### Question 3
