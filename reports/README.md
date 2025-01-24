@@ -116,9 +116,6 @@ will check the repositories and the code to verify your answers.
 * [ ] Make sure all group members have an understanding about all parts of the project
 * [ ] Uploaded all your code to GitHub
 
-Here is your content formatted in the GitHub style you requested:
-
-```markdown
 ## Group information
 
 ### Question 1
