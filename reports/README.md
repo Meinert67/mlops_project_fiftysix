@@ -333,7 +333,7 @@ However, new errors started occurring when progressing to compute engine trainin
 **Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it. You can take inspiration from this figure.**
 
 Answer:
-![my_image](figures/19_1.png)
+![19](figures/19_1.png)
 
 
 
@@ -342,13 +342,14 @@ Answer:
 **Upload 1-2 images of your GCP artifact registry, such that we can see the different docker images that you have stored. You can take inspiration from this figure.**
 
 Answer:
+![20](figures/20_1.png)
 
 
 ### Question 21
 **Upload 1-2 images of your GCP cloud build history, so we can see the history of the images that have been built in your project. You can take inspiration from this figure.**
 
 Answer:
-
+![21](figures/21_1.png)
 
 ### Question 22
 **Did you manage to train your model in the cloud using either the Engine or Vertex AI? If yes, explain how you did it. If not, describe why.**
@@ -423,6 +424,7 @@ Answer:
 **Include a figure that describes the overall architecture of your system and what services that you make use of. You can take inspiration from this figure. Additionally, in your own words, explain the overall steps in the figure.**
 
 Answer:
+![mlops_system_diagram](figures/mlops_pipeline_pic.png)
 
 
 ### Question 30
