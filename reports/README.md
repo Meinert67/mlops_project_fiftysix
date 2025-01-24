@@ -271,9 +271,12 @@ Recommended answer length: 200-300 words + 1 to 3 screenshots.
 
 Example: As seen in the first image we have tracked ... and ... which both inform us about ... in our experiments. As seen in the second image we are also tracking ... and ...
 
- Answer:
-
-
+Answer:
+In Weights and Bias we have 4 graphs, that track the training loss, training accuracy, test loss and test accuracy. We track the parameters batch size, learning rate, amount of epochs and dropout rate. 
+In image 1 we can see, the difference between a dropput rate of 0.2 and 0.5, all other parameters are the same. In this case it does not seem to make a major difference. The model preforms fairly well, both on new and trained data. 
+On the test dataset, which is unseen data for the model. The model with 0.2 dropout rate gets an accuracy of 70 %, which is good compared to the baseline of guessing that would be 10 % as there are 10 classes. With a 0.5 dropout rate the model gets an average test accuracy of 66 %. We can see a increase in train accuracy and a decline in train loss, which indicates that the model learns somehing and becomes better at correctly predicting the class of an image.
+In the graphs we can also see significant fluctuations, this can be explained by the some more diffcult batches or the dropout rate. The test dataset is also smaller, which makes it more prominent. 
+![14](figures/wandb_dropout_rate.png)
 
 ### Question 15
 **Docker is an important tool for creating containerized applications. Explain how you used docker in your experiments/project? Include how you would run your docker images and include a link to one of your docker files.**
