@@ -16,16 +16,17 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.ba
 api_key = os.getenv("WANDB_API_KEY")
 
 if api_key:
-    print(f"Successfully retrieved API key")
+    print("Successfully retrieved API key")
 else:
     print("Error: WANDB_API_KEY is not set!")
+
 
 @hydra.main(version_base="1.1", config_path="../../configs", config_name="config.yaml")
 # Define the evaluation function
 def evaluate(cfg: DictConfig):
     """Evaluate the trained model on the test dataset."""
     logger.info("Starting evaluation")
-    
+
     lr = cfg.hyperparameters.learning_rate
     batch_size = cfg.hyperparameters.batch_size
     epochs = cfg.hyperparameters.epochs
@@ -54,11 +55,9 @@ def evaluate(cfg: DictConfig):
             },
         )
 
-
     # Load the test dataset
     data = preprocess()
     test_set = data.test_set
-
 
     test_dataloader = torch.utils.data.DataLoader(test_set, batch_size=batch_size, shuffle=False)
 
