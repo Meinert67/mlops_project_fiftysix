@@ -119,21 +119,21 @@ will check the repositories and the code to verify your answers.
 ## Group information
 
 ### Question 1
-> **Enter the group number you signed up on <learn.inside.dtu.dk>**
->
-> Answer: 56
+**Enter the group number you signed up on <learn.inside.dtu.dk>**
+
+Answer: 56
 
 ### Question 2
-> **Enter the study number for each member in the group**
->
-> Answer: s203729, s236120, s234867 and s234829.
+ **Enter the study number for each member in the group**
+
+ Answer: s203729, s236120, s234867 and s234829.
 
 ### Question 3
-> **A requirement to the project is that you include a third-party package not covered in the course. What framework did you choose to work with and did it help you complete the project?**
->
-> Recommended answer length: 100-200 words.
->
-> Answer:
+ **A requirement to the project is that you include a third-party package not covered in the course. What framework did you choose to work with and did it help you complete the project?**
+
+Recommended answer length: 100-200 words.
+
+Answer:
 We chose to use the third-party Python package seaborn in our project. This was used to create an easy-to-read confusion matrix using the built-in function seaborn.heatmap(). This created a nice overview in our reports/figures/evaluation_heatmap.png for our model’s classification performance. Seaborn is a Python package that builds on the popular Python package Matplotlib, for creating visuals with information. Our reason for choosing this package was to provide us with an easy-to-use solution for visualizing our model’s performance, which was put in our evaluate.py file.
 
 Our main framework is pytorch. We have chosen to use pytorch lightning as well to build our model on. Seaborn adds something neither of these frameworks do, without interfering with their functionality.
@@ -142,12 +142,12 @@ Our main framework is pytorch. We have chosen to use pytorch lightning as well t
 ## Coding environment
 
 ### Question 4
-> **Explain how you managed dependencies in your project? Explain the process a new team member would have to go through to get an exact copy of your environment.**
->
-> Recommended answer length: 100-200 words.
->
-> Answer:
->
+**Explain how you managed dependencies in your project? Explain the process a new team member would have to go through to get an exact copy of your environment.**
+
+Recommended answer length: 100-200 words.
+
+Answer:
+
 
 Through the project we’ve used the file requirements.txt, from the cookiecutter template to manage our dependencies. The list of dependencies was auto-generated using pipreqs throughout the project. One way to get a complete copy of our development environment, one could do that is to run the following commands; first cloning the github repository, so the new group member have all the files, then running pipreqs to ensure everything in the requirements is up to date, which it should be and then install the pip install -r requirements.txt. All of this is looking away from docker and google cloud, but it is assumed that the team member will have a separate intro to use those tools later:))
 
