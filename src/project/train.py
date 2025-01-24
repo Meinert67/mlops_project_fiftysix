@@ -12,7 +12,7 @@ from omegaconf import DictConfig
 api_key = os.getenv("WANDB_API_KEY")
 
 if api_key:
-    print(f"Successfully retrieved API key:")
+    print(f"Successfully retrieved API key")
 else:
     print("Error: WANDB_API_KEY is not set!")
 
