@@ -261,7 +261,7 @@ In Weights and Bias we have 4 graphs, that track the training loss, training acc
 In image 1 we can see, the difference between a dropput rate of 0.2 and 0.5, all other parameters are the same. In this case it does not seem to make a major difference. The model preforms fairly well, both on new and trained data.
 On the test dataset, which is unseen data for the model. The model with 0.2 dropout rate gets an accuracy of 70 %, which is good compared to the baseline of guessing that would be 10 % as there are 10 classes. With a 0.5 dropout rate the model gets an average test accuracy of 66 %. We can see a increase in train accuracy and a decline in train loss, which indicates that the model learns somehing and becomes better at correctly predicting the class of an image.
 In the graphs we can also see significant fluctuations, this can be explained by the some more diffcult batches or the dropout rate. The test dataset is also smaller, which makes it more prominent.
-![14](figures/wandb_dropout_rate.png)
+![wandb_dropout_rate](figures/wandb_dropout_rate.png)
 
 ### Question 15
 **Docker is an important tool for creating containerized applications. Explain how you used docker in your experiments/project? Include how you would run your docker images and include a link to one of your docker files.**
@@ -322,7 +322,7 @@ However, new errors started occurring when progressing to compute engine trainin
 **Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it. You can take inspiration from this figure.**
 
 Answer:
-![19](figures/19_1.png)
+![19_1](figures/19_1.png)
 
 
 
@@ -331,14 +331,14 @@ Answer:
 **Upload 1-2 images of your GCP artifact registry, such that we can see the different docker images that you have stored. You can take inspiration from this figure.**
 
 Answer:
-![20](figures/20_1.png)
+![20_1](figures/20_1.png)
 
 
 ### Question 21
 **Upload 1-2 images of your GCP cloud build history, so we can see the history of the images that have been built in your project. You can take inspiration from this figure.**
 
 Answer:
-![21](figures/21_1.png)
+![21_1](figures/21_1.png)
 
 ### Question 22
 **Did you manage to train your model in the cloud using either the Engine or Vertex AI? If yes, explain how you did it. If not, describe why.**
@@ -413,7 +413,7 @@ Answer:
 **Include a figure that describes the overall architecture of your system and what services that you make use of. You can take inspiration from this figure. Additionally, in your own words, explain the overall steps in the figure.**
 
 Answer:
-![mlops_system_diagram](figures/mlops_pipeline_pic.png)
+![mlops_pipeline_pic](figures/mlops_pipeline_pic.png)
 The starting point of the diagram is 'Dev', where we developed the project and the code. From here we will commit and push it to git. In GitHub several tests are done in Actions, this includes a pre-commit and test file. When a branch is pushed to main, then Cloud Build builds a Docker Image that is saved to Artifact Registry. From 'Dev' we can get Vertex AI on Google Cloud to collect and run the latest Docker Image from the Artifact Registry, where it will train the model.
 Furthermore, from 'Dev' we can train the model locally and push it to Google Cloud, where a user can access its input and output via an API. The User has many paths they can take to use the model. They can clone the Source code directly from GitHub, or pull the newest Docker Image from Artifact Registry. The user can also choose to just query and download the trained model, from Vertex AI, to their computer. Finally the user can upload a picture to the API, where the model will run and try to predict which of the 10 classes best fits the image. A prediction will then be sent back to the user.
 
