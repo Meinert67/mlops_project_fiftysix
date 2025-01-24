@@ -344,7 +344,7 @@ Answer:
 **Did you manage to train your model in the cloud using either the Engine or Vertex AI? If yes, explain how you did it. If not, describe why.**
 
 Answer:
-We used our previously created virtual machine only with CPU, where Python was installed. We tried to have a version of PyTorch pre-installed, this caused some issues, therefore we used Vertex AI instead. We created a custom job, which runs our latest image from Artifact Registry. This command is initialized locally and uses the config file `config_cpu.yaml`, creates a virtual machine, collects the image, and runs it. In the logs, we can see the accuracy from our own logger. It can also be set up to work with wandb, however, we did not manage to get this to work.
+For this, we used our previously created virtual machine only with CPU, where Python was installed. We tried to have a version of PyTorch pre-installed, this caused some issues, therefore we used Vertex AI instead. We created a custom job, which runs our latest image from Artifact Registry. This command is initialized locally and uses the config file `config_cpu.yaml`, creates a virtual machine, collects the image, and runs it. In the logs, we can see the accuracy from our own logger. It can also be set up to work with wandb, however, we did not manage to get this to work.
 
 
 ## Deployment
@@ -397,7 +397,7 @@ Answer:
 In total we used $7.25 credits.
 Thursday 23/10 : 15.08
 
-Most things worked very well. It was kinda confusing that almost everything can be done both in terminal and on the site, and they were not the same difficulty. Some things were much easier on the terminal, while some things almost didn’t work. But nonetheless, it was very interesting and we learned a lot.
+Most things worked very well. It was kinda confusing that almost everything can be done both in terminal and on the site, and they were not the same difficulty. Some things were much easier on the terminal, while some things almost didn’t work. But nonetheless, it was very interesting and we learned a lot of skills which we can use later in our studies and work.
 
 In total, the Compute Engine used way more than the others at $6.62. Cloud storage used $0.31, Networking used $0.16, Artifact Registry used $0.03, and Vertex AI used $0.02. Cloud Run Functions didn’t cost anything.
 
