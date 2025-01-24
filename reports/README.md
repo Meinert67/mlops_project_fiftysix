@@ -333,9 +333,8 @@ However, new errors started occurring when progressing to compute engine trainin
 **Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it. You can take inspiration from this figure.**
 
 Answer:
-```markdown
-![my_image](figures/19.1.png)
-```
+![my_image](figures/19_1.png)
+
 
 
 
