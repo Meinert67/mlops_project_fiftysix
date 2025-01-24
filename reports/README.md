@@ -147,28 +147,26 @@ Our main framework is pytorch. We have chosen to use pytorch lightning as well t
 Recommended answer length: 100-200 words.
 
 Answer:
-
-
 Through the project we’ve used the file requirements.txt, from the cookiecutter template to manage our dependencies. The list of dependencies was auto-generated using pipreqs throughout the project. One way to get a complete copy of our development environment, one could do that is to run the following commands; first cloning the github repository, so the new group member have all the files, then running pipreqs to ensure everything in the requirements is up to date, which it should be and then install the pip install -r requirements.txt. All of this is looking away from docker and google cloud, but it is assumed that the team member will have a separate intro to use those tools later:))
 
 
 ### Question 5
-> **We expect that you initialized your project using the cookiecutter template. Explain the overall structure of your code. What did you fill out? Did you deviate from the template in some way?**
->
-> Recommended answer length: 100-200 words.
->
-> Answer:
->
+**We expect that you initialized your project using the cookiecutter template. Explain the overall structure of your code. What did you fill out? Did you deviate from the template in some way?**
+
+Recommended answer length: 100-200 words.
+
+Answer:
+
 We started the project by using the cookiecutter template from the course. We have followed the structure without any major deviation. The main part of our code is placed in src/project. Our data is in the data folder. Our dockerfiles and cloudbuild are in dockerfiles. The configs folder is for the hydra config and a vertex ai cpu config. Our trained model is in models. And so on. We have not used the folder notebooks. We added a .gcloudignore which is the same as the .gitignore except that the data was not ignored, when pushing to the cloud. This was so we could add the data to our cloud bucket. Some of our packages add folders, like hydra, which adds the output folder and wandb adds its own folder to keep track of the runs and configurations.
 
 
 ### Question 6
-> **Did you implement any rules for code quality and format? What about typing and documentation? Additionally, explain with your own words why these concepts matter in larger projects.**
->
-> Recommended answer length: 100-200 words.
->
-> Answer:
->
+**Did you implement any rules for code quality and format? What about typing and documentation? Additionally, explain with your own words why these concepts matter in larger projects.**
+
+Recommended answer length: 100-200 words.
+
+Answer:
+
 
 In our project, we used ruff version 0.1.3 for linting and formatting. Ruff is run in the pre-commit-config.yaml, and streamlines the code for the entire project. Furthermore, we made sure to follow the styleguide pep8 for our Python code in order to make our code better and more readable. Readable code is essential in larger multi-developer projects. This is because creating code in a predefined readable way ensures that the developers can read each other's code with little effort. In addition to this, it’s important to document functions and important parts of your code with comments. This is crucial for explaining complex functions and solutions in your code.
 
@@ -176,54 +174,53 @@ In our project, we used ruff version 0.1.3 for linting and formatting. Ruff is r
 ## Version control
 
 ### Question 7
-> **How many tests did you implement and what are they testing in your code?**
->
-> Recommended answer length: 50-100 words.
->
-> Answer:
->
+**How many tests did you implement and what are they testing in your code?**
+
+Recommended answer length: 50-100 words.
+
+Answer:
+
 
 It was important for us to implement tests that made sure our data and model worked as intended. To begin we created test_data.py which tests for the correct amount of image in the train and test dataset. Furthermore, it also checks for the correct amount of training targets in the dataset. The file test_model.py creates and runs the model with a random input, and checks for the correct size of the model output.
 
 
 ### Question 8
-> **What is the total code coverage (in percentage) of your code? If your code had a code coverage of 100% (or close to), would you still trust it to be error-free? Explain your reasoning.**
->
-> Recommended answer length: 100-200 words.
->
-> Answer:
->
+**What is the total code coverage (in percentage) of your code? If your code had a code coverage of 100% (or close to), would you still trust it to be error-free? Explain your reasoning.**
+
+Recommended answer length: 100-200 words.
+
+Answer:
+
 The total code coverage of our code is 80%, which includes tests for our data.py and model.py. While 80% is not a total coverage of our source code, it is a reasonably high code coverage, which is a good indicator that we have tested our code. Even with a hundred percent code coverage there is no guarantee that the code would be bug free and therefore there is no guarantee that there are no errors or bugs. However, hopefully the high code coverage has helped us with limiting these slightly. The total code coverage was obtained through running coverage run -m pytest tests/ which runs our tests in the tests folder, and gives a percentage of how much of the source code files is run through in our tests.
 
 
 ### Question 9
-> **Did your workflow include using branches and pull requests? If yes, explain how. If not, explain how branches and pull requests can help improve version control.**
->
-> Recommended answer length: 100-200 words.
->
-> Answer:
->
+**Did your workflow include using branches and pull requests? If yes, explain how. If not, explain how branches and pull requests can help improve version control.**
+Recommended answer length: 100-200 words.
+
+Answer:
+
 
 To simplify our workflow we chose not to use other branches than the main branch. This worked due to our group's minimal size, however in larger teams, there is a lot to benefit from using personal branches or feature branches for a larger assignment. When in larger groups using branches works as an extra layer of protection that protects our code by preventing the different members from overwriting each other's code. We would therefore have chosen personal branches if not for our minimal group size. Furthermore we could by using pull requests add a layer of safety since the changes are only applied after review and testing. Being completely honest this way of working led to more need of communication and one or two slight mix-ups in git pull/pushes, which have taught us the values of branches the hard way.
 
 
 ### Question 10
-> **Did you use DVC for managing data in your project? If yes, then how did it improve your project to have version control of your data. If no, explain a case where it would be beneficial to have version control of your data.**
->
-> Recommended answer length: 100-200 words.
->
-> Answer:
->
+**Did you use DVC for managing data in your project? If yes, then how did it improve your project to have version control of your data. If no, explain a case where it would be beneficial to have version control of your data.**
+
+Recommended answer length: 100-200 words.
+
+Answer:
+
 Data version control in this course was a bit of a bumpy road. Since the part with google drive had been removed from the curriculum in the start of the course, we’ve only started using dvc when working with google cloud. We ended up making use of gsutil instead through the Google storage extension (gs) adding files to our repository/bucket. If we have had more changing data or had it originally stored in google drive dvc could have helped us tracking and versioning and could have had an even bigger role if we had worked with larger datasets (and models). For controlling the data and model reproducibility part of our pipeline it can be a nice extension to git, where github takes care of the code part, google cloud takes care of the data and models.
 
 
 ### Question 11
-> **Discuss your continuous integration setup. What kind of continuous integration are you running (unittesting, linting, etc.)? Do you test multiple operating systems, Python versions etc. Do you make use of caching? Feel free to insert a link to one of your GitHub actions workflow.**
->
-> Recommended answer length: 200-300 words.
->
-> Answer:
->
+**Discuss your continuous integration setup. What kind of continuous integration are you running (unittesting, linting, etc.)? Do you test multiple operating systems, Python versions etc. Do you make use of caching? Feel free to insert a link to one of your GitHub actions workflow.**
+
+Recommended answer length: 200-300 words.
+
+Answer:
+
 
 We implemented continuous integration into our project. Specifically we created unittesting in test_data.py and test_model.py. Furthermore we implemented a linting step using ruff --fix in the pre-commit-config.yaml file, to improve our source code readability. We created a workflow that automatically runs the pre-commit upon pushing to git.
 
@@ -238,14 +235,14 @@ An example of a triggered workflow can be seen here: Changed pre-commit · Meine
 ## Running code and tracking experiments
 
 ### Question 12
-> **How did you configure experiments? Did you make use of config files? Explain with coding examples of how you would run an experiment.**
->
-> Recommended answer length: 50-100 words.
->
-> Example: We used a simple argparser, that worked in the following way: Python my_script.py --lr 1e-3 --batch_size 25
->
-> Answer:
->
+**How did you configure experiments? Did you make use of config files? Explain with coding examples of how you would run an experiment.**
+
+Recommended answer length: 50-100 words.
+
+Example: We used a simple argparser, that worked in the following way: Python my_script.py --lr 1e-3 --batch_size 25
+
+Answer:
+
 
 In our project, we made use of config files. Specifically we have config.yaml and config_cpu.yaml. The former is used for configuring the hyperparameters for training our model. This includes bath_size, epochs, learning_rate, dropout_rate and HYDRA_FULL_ERROR.
 The latter is used for setting up vertex AI in google cloud. Vertex can be used to train the model.
@@ -254,12 +251,12 @@ We did not implement an argparser, since config files were sufficient.
 
 
 ### Question 13
-> **Reproducibility of experiments is important. Related to the last question, how did you secure that no information is lost when running experiments and that your experiments are reproducible?**
->
-> Recommended answer length: 100-200 words.
->
-> Answer:
->
+**Reproducibility of experiments is important. Related to the last question, how did you secure that no information is lost when running experiments and that your experiments are reproducible?**
+
+Recommended answer length: 100-200 words.
+
+Answer:
+
 
 To ensure our experiments are reproducible, we made use of config files to ensure that the parameters were the same. When train.py is run to train the model, a shuffling of our train dataset is done. Here we use seeding to make sure that the shuffle is the same each time, thus ensuring reproducibility.
 
@@ -268,22 +265,21 @@ To reproduce an experiment, one would have to make sure not to change the seed o
 
 
 ### Question 14
-> **Upload 1 to 3 screenshots that show the experiments that you have done in W&B (or another experiment tracking service of your choice). This may include loss graphs, logged images, hyperparameter sweeps etc. You can take inspiration from this figure. Explain what metrics you are tracking and why they are important.**
->
-> Recommended answer length: 200-300 words + 1 to 3 screenshots.
->
-> Example: As seen in the first image we have tracked ... and ... which both inform us about ... in our experiments. As seen in the second image we are also tracking ... and ...
->
-> Answer:
->
+**Upload 1 to 3 screenshots that show the experiments that you have done in W&B (or another experiment tracking service of your choice). This may include loss graphs, logged images, hyperparameter sweeps etc. You can take inspiration from this figure. Explain what metrics you are tracking and why they are important.**
+
+Recommended answer length: 200-300 words + 1 to 3 screenshots.
+
+Example: As seen in the first image we have tracked ... and ... which both inform us about ... in our experiments. As seen in the second image we are also tracking ... and ...
+
+ Answer:
+
 
 
 ### Question 15
-> **Docker is an important tool for creating containerized applications. Explain how you used docker in your experiments/project? Include how you would run your docker images and include a link to one of your docker files.**
->
-> Recommended answer length: 100-200 words.
->
-> Answer:
+**Docker is an important tool for creating containerized applications. Explain how you used docker in your experiments/project? Include how you would run your docker images and include a link to one of your docker files.**
+Recommended answer length: 100-200 words.
+
+Answer:
 For our project we developed two images: one for training and one for deployment. Our training docker image starts by installing python version 3.12.8-slim. It copies our main code, data, configs and requirement.txt and pyproject.toml. As well as models and reports mostly for structure consistency. It installs all packages from requirements and runs our training script with the parameters specified in the config file.
 Our api image is a similar startup, except it does not copy the data, configs or reports folders. It also exposes a $port which is defined when running the image. The images run the script api, which takes in an image input.
 Locally it can be run by the command:
