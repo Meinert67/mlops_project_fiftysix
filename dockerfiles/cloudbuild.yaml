@@ -15,18 +15,18 @@ steps:
     'push',
     'europe-north1-docker.pkg.dev/fast-asset-447810-r9/repdocker/myimage'
   ]
-  - name: 'gcr.io/cloud-builders/gcloud'
-  id: 'Deploy to Cloud Run'
-  args: [
-    'run',
-    'deploy',
-    'gcr.io/cloud-builders/gcloud',
-    '--image',
-    ''europe-north1-docker.pkg.dev/fast-asset-447810-r9/repdocker/testing',
-    '--region',
-    'europe-north1',
-    '--platform',
-    'managed',
-  ]
+  # - name: 'gcr.io/cloud-builders/gcloud'
+  # id: 'Deploy to Cloud Run'
+  # args: [
+  #   'run',
+  #   'deploy',
+  #   'gcr.io/cloud-builders/gcloud',
+  #   '--image',
+  #   ''europe-north1-docker.pkg.dev/fast-asset-447810-r9/repdocker/testing',
+  #   '--region',
+  #   'europe-north1',
+  #   '--platform',
+  #   'managed',
+  # ]
 options:
   logging: CLOUD_LOGGING_ONLY
