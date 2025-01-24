@@ -334,7 +334,7 @@ However, new errors started occurring when progressing to compute engine trainin
 
 Answer:
 ```markdown
-![my_image](figures/19.9.png)
+![my_image](figures/19.1.png)
 ```
 
 
